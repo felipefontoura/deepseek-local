@@ -2,11 +2,34 @@ services:
   ollama-server:
     container_name: ollama-server
     image: ollama/ollama:latest
+    environment:
+      - OLLAMA_HOST=0.0.0.0
     ports:
       - "11434:11434"
     volumes:
       - ollama-model-cache:/root/.ollama
-    restart: unless-stopped
+    restart: always
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities:
+    #             - gpu
+  openweb-ui:
+    container_name: openweb-ui
+    image: ghcr.io/open-webui/open-webui:main # ghcr.io/open-webui/open-webui:cuda for GPU support
+    depends_on:
+      - ollama-server
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama-server:11434
+    volumes:
+      - open-webui-data:/app/backend/data
+    restart: always
 
 volumes:
   ollama-model-cache:
+  open-webui-data:

@@ -4,12 +4,12 @@ This repository provides instructions for setting up Ollama with the DeepSeek-R1
 
 ## Overview
 
-Ollama provides local execution of large language models with:
+Ollama enables local execution of large language models with:
 
 - GPU acceleration support
 - Simple CLI interface
 - REST API for application integration
-- No data sent to third-party services
+- No data transmission to third-party services
 
 ## Installation
 
@@ -19,19 +19,19 @@ Download and install Ollama from the [official website](https://ollama.ai)
 
 To run the DeepSeek-R1 14B model:
 
-1. Run Ollama Server
+1. Start the Ollama Server:
 
 ```bash
 ollama serve
 ```
 
-2. Install and run model
+2. Install and run the model:
 
 ```bash
 ollama run deepseek-r1:14b
 ```
 
-## Using DeepSeek-R1 on Docker
+## Using DeepSeek-R1 with Docker
 
 1. Build and start the Ollama server container:
 
@@ -39,30 +39,26 @@ ollama run deepseek-r1:14b
 docker compose up -d
 ```
 
-2. Wait a few moments for the server to initialize, then pull and run the DeepSeek model:
+The DeepSeek-R1 14B model will be automatically downloaded and loaded when the container starts.
 
-```bash
-docker exec -it ollama-server ollama run deepseek-r1:14b
-```
+2. Access the OpenWeb UI at <http://localhost:3000>
 
-Note: The first run will download the model which may take some time depending on your internet connection.
-
-To stop the container:
+To stop the containers:
 
 ```bash
 docker compose down
 ```
 
-The model data is persisted in a Docker volume named `ollama-model-cache` and will be reused on subsequent runs.
+Model data is persisted in a Docker volume named `ollama-model-cache` and will be reused on subsequent runs.
 
 ## Additional DeepSeek-R1 Models
 
-Browse more models in the [Ollama's DeepSeek Library](https://ollama.com/library/deepseek-r1).
+Browse additional models in the [Ollama DeepSeek Library](https://ollama.com/library/deepseek-r1).
 
 ## Integration Examples
 
 - [X] [Python script integration](./python/README.md)
-- [ ] N8n workflow automation
+- [ ] n8n workflow automation
 
 ## Community & Support
 
