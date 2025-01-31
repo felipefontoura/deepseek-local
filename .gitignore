@@ -3,3 +3,5 @@
 .env.local
 .env.*.local
 
+# Tool vesions asdf files
+.tool-versions
