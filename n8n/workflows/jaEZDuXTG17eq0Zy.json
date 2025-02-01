@@ -1,0 +1,116 @@
+{
+  "createdAt": "2025-01-31T23:57:56.732Z",
+  "updatedAt": "2025-01-31T23:59:34.731Z",
+  "id": "jaEZDuXTG17eq0Zy",
+  "name": "Basic Chat Agent",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -60,
+        -40
+      ],
+      "id": "2741e180-fda4-46dc-9e5d-75193242cde8",
+      "name": "When chat message received",
+      "webhookId": "3154e8df-e3b2-4fa4-b13c-fb15e6c0bc76"
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        140,
+        -40
+      ],
+      "id": "f4e1d404-1eaf-4c19-acc2-cdeee5e31258",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1:7b",
+        "options": {
+          "temperature": 0.6
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        80,
+        180
+      ],
+      "id": "233fe423-8d5c-45a2-ab50-fee3685bb00c",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "hjG8I4fs6s9CzOJ2",
+          "name": "Ollama local server"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        180
+      ],
+      "id": "c2d143b3-473e-48b1-beff-843272daac5a",
+      "name": "Window Buffer Memory"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "7cbbb5bd-7540-4a58-b382-d79acabb9136",
+  "triggerCount": 0,
+  "tags": []
+}
