@@ -84,7 +84,7 @@ Browse additional models in the [Ollama DeepSeek Library](https://ollama.com/lib
 ## Integration Examples
 
 - [X] [Python script integration](./python/README.md)
-- [ ] n8n workflow automation
+- [x] [n8n workflow automation](./n8n/README.md)
 
 ## Community & Support
 
