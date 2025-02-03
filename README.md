@@ -33,7 +33,17 @@ ollama run deepseek-r1:7b
 
 ## Using Ollama DeepSeek-R1 with Docker
 
-1. Start containers:
+The setup includes several services working together:
+
+- **Ollama Server**: LLM inference engine (port 11434)
+- **OpenWeb UI**: Web interface for Ollama (port 3000)
+- **n8n**: Workflow automation platform (port 5678)
+- **Qdrant**: Vector database for embeddings (ports 6333, 6334)
+- **PostgreSQL**: Database for n8n (port 5432)
+
+### Starting the Services
+
+1. Start all containers:
 
 ```bash
 docker compose up -d
@@ -41,7 +51,10 @@ docker compose up -d
 
 The DeepSeek-R1 7B model will be automatically downloaded and loaded when the container starts.
 
-2. Access the OpenWeb UI at <http://localhost:3000>
+2. Access the services:
+   - OpenWeb UI: <http://localhost:3000>
+   - n8n Dashboard: <http://localhost:5678>
+   - Qdrant Dashboard: <http://localhost:6333/dashboard>
 
 To stop the containers:
 
@@ -49,7 +62,20 @@ To stop the containers:
 docker compose down
 ```
 
-Model data is persisted in a Docker volume named `ollama-model-cache` and will be reused on subsequent runs.
+Data persistence:
+
+- Model data: `ollama-model-cache` volume
+- n8n data: `n8n-data` volume
+- OpenWeb UI data: `open-webui-data` volume
+- PostgreSQL data: `postgres-data` volume
+- Qdrant data: `qdrant-data` volume
+
+### GPU Support (Optional)
+
+To enable GPU support:
+
+1. Uncomment the GPU-related sections in `docker-compose.yml`
+2. Change OpenWeb UI image to `ghcr.io/open-webui/open-webui:cuda`
 
 ## Additional DeepSeek-R1 Models
 
